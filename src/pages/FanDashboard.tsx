@@ -71,7 +71,7 @@ export default function FanDashboard({ language }: { language: string }) {
                  loading="lazy"
                  allowFullScreen
                  referrerPolicy="no-referrer-when-downgrade"
-                 src={`https://www.google.com/maps/embed/v1/place?key=MOCK_GOOGLE_MAPS_KEY&q=Wembley+Stadium`}
+                 src="https://maps.google.com/maps?q=Wembley+Stadium&t=&z=15&ie=UTF8&iwloc=&output=embed"
                ></iframe>
                <div className="z-10 text-center pointer-events-none">
                  <p className="text-white font-medium bg-black/60 px-4 py-2 rounded backdrop-blur-sm">Interactive Map</p>
