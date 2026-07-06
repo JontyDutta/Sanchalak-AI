@@ -62,14 +62,19 @@ export default function FanDashboard({ language }: { language: string }) {
               <h2 className="text-lg font-bold">Stadium Map</h2>
             </div>
             <div className="aspect-video bg-slate-200 dark:bg-slate-800 rounded-lg flex items-center justify-center relative overflow-hidden group">
-               <img 
-                 src="https://images.unsplash.com/photo-1577223625816-7546f13df25d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
-                 alt="Stadium Map Placeholder" 
-                 className="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-overlay group-hover:scale-105 transition-transform duration-700"
-               />
-               <div className="z-10 text-center">
-                 <p className="text-slate-500 dark:text-slate-300 font-medium bg-black/40 px-4 py-2 rounded backdrop-blur-sm">Interactive Map view</p>
-                 <p className="text-xs text-slate-400 mt-2">(Use Copilot for directions)</p>
+               <iframe
+                 title="Stadium Map"
+                 width="100%"
+                 height="100%"
+                 className="absolute inset-0 z-0 opacity-70 group-hover:opacity-100 transition-opacity"
+                 style={{ border: 0 }}
+                 loading="lazy"
+                 allowFullScreen
+                 referrerPolicy="no-referrer-when-downgrade"
+                 src={`https://www.google.com/maps/embed/v1/place?key=MOCK_GOOGLE_MAPS_KEY&q=Wembley+Stadium`}
+               ></iframe>
+               <div className="z-10 text-center pointer-events-none">
+                 <p className="text-white font-medium bg-black/60 px-4 py-2 rounded backdrop-blur-sm">Interactive Map</p>
                </div>
             </div>
           </section>

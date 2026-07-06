@@ -70,8 +70,10 @@ export const getGeminiResponse = async (role: string, prompt: string, language: 
         let functionResponse = {};
         
         if (call.name === 'get_gate_status') {
-          const gateId = (call.args as any).gateId;
-          const gate = (stadiumData.gates as any)[gateId];
+          const args = call.args as Record<string, string>;
+          const gateId = args.gateId;
+          const gates = stadiumData.gates as Record<string, unknown>;
+          const gate = gates[gateId];
           functionResponse = gate ? gate : { error: "Gate not found" };
         } else if (call.name === 'report_incident') {
           functionResponse = { status: "Success", ticketId: "INC-" + Math.floor(Math.random() * 1000) };
@@ -86,14 +88,15 @@ export const getGeminiResponse = async (role: string, prompt: string, language: 
       }
 
       return result.response.text();
-    } catch (error: any) {
-      console.warn(`Model ${modelName} failed:`, error);
-      lastError = error;
+    } catch (error: unknown) {
+      const err = error as Error;
+      console.warn(`Model ${modelName} failed:`, err);
+      lastError = err;
       
-      const errorString = (error?.message || String(error)).toLowerCase();
+      const errorString = (err?.message || String(err)).toLowerCase();
       // If it's a critical error (not a quota/capacity issue), throw immediately
       if (!errorString.includes('503') && !errorString.includes('429') && !errorString.includes('404') && !errorString.includes('quota') && !errorString.includes('overloaded')) {
-        throw error;
+        throw err;
       }
       // Otherwise, continue to the next fallback model
     }

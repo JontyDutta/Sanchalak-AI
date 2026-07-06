@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, BarChart3, AlertTriangle, Users, Activity } from 'lucide-react';
+import { ArrowLeft, BarChart3, AlertTriangle, Activity } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import AIChatInterface from '../components/AIChatInterface';
 import { stadiumData } from '../data/mockData';
@@ -23,8 +23,13 @@ export default function OrganizerDashboard({ language }: { language: string }) {
               <Activity className="text-fifa-red" /> Organizer Command Center
             </h1>
           </div>
-          <div className="bg-fifa-red text-white px-3 py-1 rounded-full text-sm font-medium animate-pulse">
-            LIVE - MATCH IN PROGRESS
+          <div className="flex gap-2">
+            <div className="bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+              Prompt Wars Eval
+            </div>
+            <div className="bg-fifa-red text-white px-3 py-1 rounded-full text-sm font-medium animate-pulse">
+              LIVE - MATCH IN PROGRESS
+            </div>
           </div>
         </div>
       </header>

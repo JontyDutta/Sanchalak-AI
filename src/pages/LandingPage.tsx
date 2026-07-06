@@ -54,7 +54,7 @@ export default function LandingPage({ setDarkMode, darkMode, language, setLangua
         </button>
       </div>
 
-      <div className="z-10 text-center max-w-3xl w-full">
+      <main className="z-10 text-center max-w-3xl w-full">
         <h1 className="text-5xl md:text-7xl font-black text-white mb-4 tracking-tight">
           SANCHALAK <span className="text-fifa-gold">AI</span>
         </h1>
@@ -67,6 +67,7 @@ export default function LandingPage({ setDarkMode, darkMode, language, setLangua
             <Link 
               key={role.name}
               to={role.path}
+              aria-label={`Enter ${role.name} Portal`}
               className={`group flex items-center p-6 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md transition-all duration-300 hover:scale-[1.02]`}
             >
               <div className={`${role.color} p-4 rounded-xl text-white mr-6 shadow-lg group-hover:scale-110 transition-transform`}>
@@ -79,7 +80,7 @@ export default function LandingPage({ setDarkMode, darkMode, language, setLangua
             </Link>
           ))}
         </div>
-      </div>
+      </main>
       
       <div className="absolute bottom-6 z-10 text-slate-400 text-sm font-light">
         Powered by Gemini AI • Real-time Decision Support

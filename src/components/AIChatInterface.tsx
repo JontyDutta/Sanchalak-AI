@@ -29,7 +29,7 @@ export default function AIChatInterface({ role, language = 'English' }: Props) {
     scrollToBottom();
   }, [messages]);
 
-  const handleSend = async (e?: React.FormEvent, customText?: string) => {
+  const handleSend = React.useCallback(async (e?: React.FormEvent, customText?: string) => {
     if (e) e.preventDefault();
     const textToSend = customText || input;
     if (!textToSend.trim()) return;
@@ -53,7 +53,7 @@ export default function AIChatInterface({ role, language = 'English' }: Props) {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [input, language, role]);
 
   useEffect(() => {
     const handleExternalMessage = (e: any) => {
@@ -61,7 +61,7 @@ export default function AIChatInterface({ role, language = 'English' }: Props) {
     };
     window.addEventListener('send-ai-message', handleExternalMessage);
     return () => window.removeEventListener('send-ai-message', handleExternalMessage);
-  }, [role]);
+  }, [handleSend]);
 
   return (
     <div className="flex flex-col h-full bg-white dark:bg-fifa-card rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
