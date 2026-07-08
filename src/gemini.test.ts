@@ -29,13 +29,25 @@ describe('Gemini Service', () => {
     vi.clearAllMocks();
   });
 
-  it('should return valid AI response', async () => {
+  it('should handle Fan role', async () => {
     const response = await getGeminiResponse('Fan', 'Hello', 'English');
     expect(response).toBe('Mocked AI Response');
   });
 
-  it('should gracefully handle empty prompt', async () => {
-    const response = await getGeminiResponse('Fan', '', 'English');
-    expect(response).toContain('Mocked AI Response');
+  it('should handle Volunteer role', async () => {
+    const response = await getGeminiResponse('Volunteer', 'Help', 'Spanish');
+    expect(response).toBe('Mocked AI Response');
   });
+
+  it('should handle Organizer role', async () => {
+    const response = await getGeminiResponse('Organizer', 'Status');
+    expect(response).toBe('Mocked AI Response');
+  });
+
+  it('should handle Security role', async () => {
+    const response = await getGeminiResponse('Security', 'Alert');
+    expect(response).toBe('Mocked AI Response');
+  });
+
+
 });

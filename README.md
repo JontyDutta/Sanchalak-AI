@@ -1,7 +1,8 @@
-# Sanchalak AI - Operational Intelligence Copilot for FIFA World Cup 2026
+# Sanchalak AI - Operational Intelligence Copilot
+**Submission for Challenge 4 Prompt Wars by Google for Developers**
 
 ## Problem Statement
-Managing a massive event like the FIFA World Cup involves significant challenges in crowd control, emergency response, fan navigation, and operational efficiency. Traditional systems often act reactively and rely on disjointed communication channels.
+Managing a massive event like the FIFA World Cup involves significant challenges in crowd control, emergency response, fan navigation, and operational efficiency. The challenge was to build an Agentic AI solution using Google Gemini that dynamically handles real-time crowd congestion, security incident reporting, and contextual interactions across diverse roles.
 
 ## Solution Overview
 Sanchalak AI is a GenAI-enabled stadium operations platform that acts as a real-time decision-making assistant. It leverages multi-agent AI architecture to provide contextual, actionable intelligence to four distinct user groups: Fans, Volunteers, Organizers, and Security Staff.
