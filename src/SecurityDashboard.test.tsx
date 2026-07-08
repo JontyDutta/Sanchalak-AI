@@ -8,7 +8,7 @@ describe('SecurityDashboard', () => {
   it('renders correctly', () => {
     render(
       <BrowserRouter>
-        <SecurityDashboard />
+        <SecurityDashboard language="English" />
       </BrowserRouter>
     );
     expect(screen.getByText(/Security Command/)).toBeInTheDocument();

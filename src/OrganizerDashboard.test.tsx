@@ -8,7 +8,7 @@ describe('OrganizerDashboard', () => {
   it('renders correctly', () => {
     render(
       <BrowserRouter>
-        <OrganizerDashboard />
+        <OrganizerDashboard language="English" />
       </BrowserRouter>
     );
     expect(screen.getByText(/Command Center/)).toBeInTheDocument();
