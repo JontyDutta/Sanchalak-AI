@@ -30,12 +30,12 @@ describe('Gemini Service', () => {
   });
 
   it('should return valid AI response', async () => {
-    const response = await getGeminiResponse('Fan', 'Hello', 'English', []);
+    const response = await getGeminiResponse('Fan', 'Hello', 'English');
     expect(response).toBe('Mocked AI Response');
   });
 
   it('should gracefully handle empty prompt', async () => {
-    const response = await getGeminiResponse('Fan', '', 'English', []);
+    const response = await getGeminiResponse('Fan', '', 'English');
     expect(response).toContain('Mocked AI Response');
   });
 });
