@@ -1,53 +1,47 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { getGeminiResponse } from './services/ai/gemini';
-import { GoogleGenerativeAI } from '@google/generative-ai';
 
-vi.mock('@google/generative-ai', async (importOriginal) => {
-  const actual = await importOriginal();
-  const mockGenerateContent = vi.fn().mockResolvedValue({
-    response: { 
-      text: () => 'Mocked AI Response',
-      functionCalls: () => null
-    }
-  });
-  return {
-    ...actual as any,
-    GoogleGenerativeAI: class {
-      getGenerativeModel() {
-        return {
-          startChat: vi.fn().mockReturnValue({
-            sendMessage: mockGenerateContent
-          })
-        };
-      }
-    }
-  };
-});
+vi.stubGlobal('fetch', vi.fn());
 
 describe('Gemini Service', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it('should handle Fan role', async () => {
+  it('should handle successful response', async () => {
+    vi.mocked(fetch).mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ response: 'Mocked AI Response' }),
+    } as any);
+
     const response = await getGeminiResponse('Fan', 'Hello', 'English');
     expect(response).toBe('Mocked AI Response');
+    expect(fetch).toHaveBeenCalledWith('/api/gemini', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ role: 'Fan', prompt: 'Hello', language: 'English' }),
+    });
   });
 
-  it('should handle Volunteer role', async () => {
-    const response = await getGeminiResponse('Volunteer', 'Help', 'Spanish');
-    expect(response).toBe('Mocked AI Response');
+  it('should throw error when fetch fails', async () => {
+    vi.mocked(fetch).mockResolvedValueOnce({
+      ok: false,
+      status: 500,
+      json: async () => ({ error: 'Database connection failed' }),
+    } as any);
+
+    await expect(getGeminiResponse('Fan', 'Hello', 'English')).rejects.toThrow('Database connection failed');
   });
 
-  it('should handle Organizer role', async () => {
-    const response = await getGeminiResponse('Organizer', 'Status');
-    expect(response).toBe('Mocked AI Response');
+  it('should throw default error when response body is not JSON or has no error key', async () => {
+    vi.mocked(fetch).mockResolvedValueOnce({
+      ok: false,
+      status: 404,
+      json: async () => { throw new Error('Not JSON') },
+    } as any);
+
+    await expect(getGeminiResponse('Fan', 'Hello', 'English')).rejects.toThrow('HTTP error! status: 404');
   });
-
-  it('should handle Security role', async () => {
-    const response = await getGeminiResponse('Security', 'Alert');
-    expect(response).toBe('Mocked AI Response');
-  });
-
-
 });

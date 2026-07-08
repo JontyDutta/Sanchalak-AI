@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Link } from 'react-router-dom';
 import { ArrowLeft, BarChart3, AlertTriangle, Activity } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
@@ -16,7 +16,7 @@ export default function OrganizerDashboard({ language }: { language: string }) {
       <header className="bg-white dark:bg-fifa-card border-b border-slate-200 dark:border-slate-800 p-4 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link to="/" className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+            <Link to="/" aria-label="Back to home page" className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
               <ArrowLeft size={24} />
             </Link>
             <h1 className="text-xl font-bold flex items-center gap-2">

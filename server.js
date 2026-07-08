@@ -6,6 +6,8 @@ import helmet from 'helmet';
 import compression from 'compression';
 import rateLimit from 'express-rate-limit';
 
+import { getGeminiResponseBackend } from './server-gemini.js';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -38,6 +40,17 @@ const limiter = rateLimit({
   message: 'Too many requests from this IP, please try again later.'
 });
 app.use(limiter);
+
+app.post('/api/gemini', express.json(), async (req, res) => {
+  const { role, prompt, language } = req.body;
+  try {
+    const response = await getGeminiResponseBackend(role, prompt, language);
+    res.json({ response });
+  } catch (error) {
+    console.error("Gemini backend error:", error);
+    res.status(500).json({ error: error.message || 'Internal Server Error' });
+  }
+});
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
