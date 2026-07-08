@@ -7,8 +7,8 @@ vi.mock('./services/ai/gemini', () => ({
 }))
 
 describe('App Component', () => {
-  it('renders the landing page initially', () => {
+  it('renders the landing page initially', async () => {
     render(<App />)
-    expect(screen.getByText(/SANCHALAK/i)).toBeInTheDocument()
+    expect(await screen.findByText(/SANCHALAK/i)).toBeInTheDocument()
   })
 })

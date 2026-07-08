@@ -22,6 +22,12 @@ export default function LandingPage({ setDarkMode, darkMode, language, setLangua
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee7e1635391?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')] bg-cover bg-center bg-no-repeat relative">
       <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-sm z-0"></div>
+
+      <div className="absolute top-6 left-6 z-10 hidden md:block">
+        <div className="bg-orange-500/20 border border-orange-500/50 text-orange-400 px-4 py-2 rounded-full text-sm font-bold tracking-widest uppercase backdrop-blur-md">
+          Prompt Wars Challenge 4
+        </div>
+      </div>
       
       <div className="absolute top-6 right-6 z-10 flex items-center gap-4">
         <button 
